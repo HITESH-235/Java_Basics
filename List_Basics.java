@@ -55,25 +55,5 @@ public class List_Basics {
         // slicing/subList from arr
         System.out.println(nums.subList(1, 1));
         // goes from l-->r-1 (same as in python); writing l,l will give empty list
-
-        fruits.clear();
-        fruits.add("mango");
-        fruits.add("banana");
-        fruits.add("apple");
-        fruits.add("tomato");
-        nums.sort(null); // sorting list; 
-        // Alphabetical Order sorting:
-        fruits.sort((a,b)->a.compareTo(b));
-        // fruits.sort(String::compareTo); // simpler way to write
-
-        // fruits.sort((a,b)->b.compareTo(a)); // Reverse* Order sorting
-        System.out.println(fruits);
-
-        // Sorting according to word length
-        fruits.sort((a,b)->Integer.compare(a.length(), b.length()));
-        // fruits.sort((a,b)->Integer.compare(b.length(), a.length())); // same task in reverse
-        System.out.println(fruits);
-
-        // Collections.sort(nums); // sorting list; another method
     }
 }
