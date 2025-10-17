@@ -1,11 +1,11 @@
 public class Pattern {
     public static void main(String[] args) {
         int n = 9;
-        pattern1(n);
-        pattern2(n);
-        pattern3(n);
-        pattern4(n);
-        pattern5(n);
+        // pattern1(n);
+        // pattern2(n);
+        // pattern3(n);
+        // pattern4(n);
+        // pattern5(n);
         pattern6(n);
     }
 
