@@ -26,14 +26,10 @@ public class All_Divisors {
 
     public static int Count_Divisors(int num) {
         int count = 0;
-        for (int i=1; i <= (int)(Math.sqrt(num)+1); i+=2) {
+        for (int i=1; i*i <= num; i++) {
             if (num%i == 0) {
-                if (num/i != i) {
-                    count += 2;
-                }
-                else {
-                    count += 1;
-                }
+                if (num/i != i) count += 2;
+                else count += 1;
             }
         }
         return count;
