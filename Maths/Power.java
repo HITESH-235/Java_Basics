@@ -11,8 +11,7 @@ public class Power {
         System.out.println(power(2,-31));
     }
 public static double power(double base, int exp) {
-    if (exp == 0) return 1;
-    if (base == 1) return base;
+    if (exp == 0 || base == 1) return 1;
 
     long exp2 = exp;
     if (exp2<0) {

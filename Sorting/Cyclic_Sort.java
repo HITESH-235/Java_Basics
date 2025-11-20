@@ -8,7 +8,7 @@ public class Cyclic_Sort {
         while (i<n) {
             int correct = arr[i]-start;
             // Only swap if value is in range and not at its correct position
-            if (correct<arr.length && arr[correct] != arr[i]) {
+            if (correct < n && arr[correct] != arr[i]) {
                 swap(arr,i,correct);
             }
             else i++;
@@ -21,7 +21,7 @@ public class Cyclic_Sort {
     }
 // ________________________________________________________________________________________________________________________________
 
-    // LEETCODE link: 
+    // LEETCODE link: https://leetcode.com/problems/first-missing-positive/
     // Find the first missing positive number in arr ranging from 0 to n
     public static int firstMissingPositive(int[] arr) {
         cyclicSort(arr, 0);
@@ -36,7 +36,7 @@ public class Cyclic_Sort {
     }
 // ________________________________________________________________________________________________________________________________
 
-    // LEETCODE link: 
+    // LEETCODE link: https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
     // Find all disappeared nums in arr ranging from 1 to n (len = n)
     // (8): 4,3,2,7,8,2,3,1: (5,6)
     // in BF sol, use set to store and then traverse from 1 to n for which are not in set
@@ -73,7 +73,7 @@ public class Cyclic_Sort {
 
     // LEETCODE link: https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
     // Given an arr of length N, with nums ranging from 1 to N
-    // each of its element appears twice in the arr, return an arr of elements that appears twice
+    // some of its element appears twice in the arr, return an arr of elements that appears twice
     // Brute Force method would be to use N^2 method or hashmap to do in O(N^2) TC & O(N) SC respec.
     public static List<Integer> findAllDuplicates_Sort(int[] arr) {
         int n = arr.length;
@@ -83,7 +83,7 @@ public class Cyclic_Sort {
         for (int i=0; i<n; i++) {
             if (arr[i] != i+1) res.add(arr[i]);
         }
-        return res;
+        return res; 
     }
 
     public static List<Integer> findAllDuplicates_Neg(int[] arr) {
@@ -160,35 +160,33 @@ public class Cyclic_Sort {
     public static void main(String[] args) {
         // simply sorting the array ranging from 2 to 5
         int[] arr1 = new int[]{5,4,3,2};
+        int[] arr2 = new int[]{5,4,3,2,1,0};
+        int[] arr3 = new int[]{4,3,2,7,8,2,3,1}; // 5,6
+        int[] arr4 = new int[]{4,3,5,6,2,3,1}; // 3   
+        int[] arr5 = new int[]{4,3,2,7,8,2,3,1}; // 2,3
+        int[] arr6 = new int[]{1,2,3,4,4}; // 4,5
+
         cyclicSort(arr1, 2);
         for (int e: arr1) {
             System.out.print(e+" ");
-        }
+        } // {5,4,3,2} => {2,3,4,5}
         System.out.println();
         
 
-        int[] arr2 = new int[]{5,4,3,2,1,0};
-        System.out.println(firstMissingPositive(arr2)); // 6
+        System.out.println(firstMissingPositive(arr2)); // {5,4,3,2,1,0} => {0,1,2,3,4,5} => 6
 
-        int[] arr3 = new int[]{4,3,2,7,8,2,3,1}; // 5,6
         for (int e: (allMissingPositives(arr3))) {
             System.out.print(e+" ");
         }
         System.out.println();
 
+        System.out.println(findDuplicate(arr4)); // {4,3,5,6,2,3,1} => {1,2,3,4,5,6}
 
-        int[] arr4 = new int[]{4,3,5,6,2,3,1}; // 3   
-        System.out.println(findDuplicate(arr4));
-
-
-        int[] arr5 = new int[]{4,3,2,7,8,2,3,1}; // 2,3    
         for (int e: findAllDuplicates_Sort(arr5)) {
             System.out.print(e+" ");
         }
         System.out.println();
 
-
-        int[] arr6 = new int[]{1,2,3,4,4}; // 4,5
         for (int e: setMismatch_Neg(arr6)) {
             System.out.print(e+" ");
         }
