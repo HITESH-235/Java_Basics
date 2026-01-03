@@ -38,5 +38,4 @@ public class Prime_Factors {
         if (num != 1) { res.add(num); }
         return res;
     }
-
 }
