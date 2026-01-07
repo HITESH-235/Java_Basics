@@ -1,17 +1,22 @@
 package Maths;
-
 import java.util.*;
 public class Sieve_Of_Eratosthenes {
-    public static void main(String[] arg) {
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        System.out.println(brute_force(num));
-        System.out.println(optimised(num));
-        System.out.println(optimised_2(num));
-        sc.close();
+    public static void main(String[] args) {
+        int n = 50;
+
+        System.out.println("Primes using Brute Force up to " + n + ":");
+        System.out.println(generatePrimes_BF(n));
+
+        System.out.println("\nPrimes using Sieve of Eratosthenes up to " + n + ":");
+        System.out.println(generatePrimes_Sieve(n));
     }
-    public static Vector<Integer> brute_force(int num) {
-        Vector<Integer> res = new Vector<>();
+
+/* Brute Force: O(N*sqrt(N)); O(1);
+- checks primality of every number from 2 to num
+- use a helper prime checking function */
+
+    public static List<Integer> generatePrimes_BF(int num) {
+        List<Integer> res = new Vector<>();
         if (num <= 1) { return res; }
         res.add(2);
         if (num == 2) {
@@ -22,43 +27,35 @@ public class Sieve_Of_Eratosthenes {
         }
         return res;
     }
-    public static Vector<Integer> optimised(int num) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i=2; i<=num; i+=1) {
-            map.put(i,1);
-        }
-        for (int i=2; i <= (int)(Math.sqrt(num)); i+=1){
-            if (map.get(i) == 1) {
-                for (int j = i*i; j <= num; j+= i) {
-                    map.put(j,0);
-                }
-            }
-        }
-        Vector<Integer> res = new Vector<>();
-        for (int i= 2; i <= num; i++) {
-            if (map.get(i) == 1) {
-                res.add(i);
-            }
-        }
-        return res;
-    }
-    public static Vector<Integer> optimised_2(int num) {
-        boolean[] map = new boolean[num+1]; // as it starts from 0
-        for (int i=2; i<=num; i+=1) {
-            map[i] = true;
-        }
+
+/* Sieve of Erastosthenes: O(Nlog(log(N))); O(N)
+- assume all nums are prime initially
+- mark multiples of each prime as non prime
+- start marking from i*i (smaller multiples are already handled in previous loops) */
+
+    public static List<Integer> generatePrimes_Sieve(int num) {
+        List<Integer> res = new Vector<>();
+        if (num <= 1) return res;
+
+        // isPrime[i] indicates whether i is prime
+        boolean[] isPrime = new boolean[num+1];
+        Arrays.fill(isPrime, true);
+
+        isPrime[0] = false; // since 0 and 1 are not prime
+        isPrime[1] = false;
+        
         for (int i=2; i*i <= num; i+=1){
-            if (map[i]) {
-                int j = i*i;
-                while (j<=num) {
-                    map[j] = false;
-                    j+=i;
+            if (isPrime[i]) {
+                // mark all multiples of i as non primes
+                for (int j=i*i; j<=num; j++) {
+                    isPrime[j] = false;
                 }
             }
         }
-        Vector<Integer> res = new Vector<>();
+
+        // collect all primes
         for (int i= 2; i <= num; i++) {
-            if (map[i]) {
+            if (isPrime[i]) {
                 res.add(i);
             }
         }
