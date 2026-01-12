@@ -33,9 +33,7 @@ public class List_Basics {
         // get the type of nums (class)
         System.out.println(nums.getClass().getName());
         // get the first element of list
-        System.out.println(nums.getFirst());
         // get the last element of list
-        System.out.println(nums.getLast());
 
         nums.add(0, -1); // adding element = -1 at an index 0
         System.out.println(nums);
